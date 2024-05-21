@@ -13,7 +13,7 @@ coverage.xml
 .pytest_cache
 node_modules
 build
-dist
+dist/*tar.gz
 *.AppImage
 dask-worker-space
 AppDir
