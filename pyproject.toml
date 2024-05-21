@@ -3,27 +3,24 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "temgymbasic"
+name = "temgymlite"
 version = "0.6.0.0"
 authors = [
   { name="David Landers", email="davidlanders2009@hotmail.com" },
+  { name="Georgios Varnavides", email="gvarnavides@berkeley.edu" },
 ]
-description = "An educational TEM ray tracing matrix package"
+description = "A lite version of the educational TEM ray tracing matrix package TEMGymBasic"
 readme = "README.md"
-Requires-Python = "3.9.6"
+requires-python = ">3.9.6"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Operating System :: OS Independent",
 ]
 dependencies = [
-  'pyqtgraph',
-  'pyopengl',
   'numpy',
-  'triangle',
-  'PyQt5',
-  'matplotlib'
+  'matplotlib',
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/AMCLab/TemGymBasic"
+"Homepage" = "https://github.com/gvarnavi/TemGymLite"
