@@ -7,7 +7,7 @@ mpl.rc("axes", titlesize=32, labelsize=28)
 
 
 def show_matplotlib(
-    model, name="model.svg", component_lw=4, edge_lw=1, label_fontsize=20
+    model, name="model.svg", component_lw=4, edge_lw=1, label_fontsize=20, figax=None
 ):
     """Code to show a matplotlib model
 
@@ -38,10 +38,13 @@ def show_matplotlib(
     x, _, z = rays[:, 0, :], rays[:, 2, :], model.z_positions
 
     # Create a figure
-    fig, ax = plt.subplots(figsize=(12, 20))
+    if figax is None:
+        fig, ax = plt.subplots(figsize=(12, 20))
+    else:
+        fig, ax = figax
 
-    ax.tick_params(axis="both", which="major", labelsize=14)
-    ax.tick_params(axis="both", which="minor", labelsize=12)
+    ax.tick_params(axis="both", which="major", labelsize=label_fontsize / 20 * 14)
+    ax.tick_params(axis="both", which="minor", labelsize=label_fontsize / 20 * 12)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     ax.spines["bottom"].set_visible(False)

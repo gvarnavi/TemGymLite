@@ -633,11 +633,22 @@ class Aperture:
 
         return matrix
 
-class Sample():
-    '''Creates a sample component which serves only as a visualisation on the 3D model. 
-    '''    
-    def __init__(self, z = 0., sample = None, name = '', label_radius = 0.3, width = 0.25, num_points = 50, x = 0., y = 0.):
-        '''
+
+class Sample:
+    """Creates a sample component which serves only as a visualisation on the 3D model."""
+
+    def __init__(
+        self,
+        z=0.0,
+        sample=None,
+        name="",
+        label_radius=0.3,
+        width=0.25,
+        num_points=50,
+        x=0.0,
+        y=0.0,
+    ):
+        """
 
         Parameters
         ----------
@@ -657,48 +668,48 @@ class Sample():
             Y position of sample model, by default 0.
         width : float, optional
             Width of the edges of the square sample, by default 0.25
-        '''        
+        """
 
-        self.type = 'Sample'
-        
+        self.type = "Sample"
+
         self.x = x
         self.y = y
         self.z = z
-        self.width = width 
+        self.width = width
         self.label_radius = label_radius
         self.num_points = num_points
-        
-        self.sample_image_x = x - width/2
-        self.sample_image_y = y - width/2
+
+        self.sample_image_x = x - width / 2
+        self.sample_image_y = y - width / 2
         self.sample_image_z = 0
 
         self.sample = sample
         self.sample_size = width
-        
+
         self.blocked_ray_idcs = []
         self.name = name
         self.set_matrix()
 
-
     def sample_matrix(self):
-        '''Sample transfer matrix - simply a unit matrix of ones because we don't interact with the sample yet. 
+        """Sample transfer matrix - simply a unit matrix of ones because we don't interact with the sample yet.
 
         Returns
         -------
         ndarray
             unit matrix
-        '''        
-        matrix = np.array([[1, 0, 0, 0, 0],
-                           [0, 1, 0, 0, 0],
-                           [0, 0, 1, 0, 0],
-                           [0, 0, 0, 1, 0],
-                           [0, 0, 0, 0, 1]])
+        """
+        matrix = np.array(
+            [
+                [1, 0, 0, 0, 0],
+                [0, 1, 0, 0, 0],
+                [0, 0, 1, 0, 0],
+                [0, 0, 0, 1, 0],
+                [0, 0, 0, 0, 1],
+            ]
+        )
 
         return matrix
-        
+
     def set_matrix(self):
-        '''
-        '''        
+        """ """
         self.matrix = self.sample_matrix()
-    
-    
