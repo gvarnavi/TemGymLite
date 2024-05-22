@@ -1,3 +1,12 @@
+# Tem Gym Lite
+
+Quick fork of the excellent [Tem Gym Basic](https://github.com/AMCLab/TemGymBasic/blob/main/pyproject.toml) package which strips PyQt5 and PyOpenGl functionality to make it importable in a Pyodide kernel.
+See a quick example using a marimo notebook [here](https://marimo.app/?slug=re6ved).
+
+Original README file below.
+
+---
+
 # Tem Gym Basic
 
 Please cite the following paper if you use this software in your research: 
