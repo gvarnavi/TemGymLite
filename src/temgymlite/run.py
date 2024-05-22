@@ -17,6 +17,7 @@ def show_matplotlib(
     fill_color="aquamarine",
     fill_color_pair=["khaki", "deepskyblue"],
     plot_rays=True,
+    show_labels=True,
     highlight_edges=True,
     fill_between=True,
     fill_alpha=1,
@@ -49,7 +50,7 @@ def show_matplotlib(
     rays = model.step()
 
     # Collect their x, y & z coordinates
-    x, _, z = rays[:, 0, :], rays[:, 2, :], model.z_positions
+    x, z = rays[:, 0, :], model.z_positions
 
     # Create a figure
     if figax is None:
@@ -72,7 +73,6 @@ def show_matplotlib(
     ax.set_xlim([-0.5, 0.5])
     ax.set_ylim([0, model.beam_z])
     ax.set_aspect("equal", adjustable="box")
-    ax.text(0, model.beam_z, "Electron Gun", fontsize=label_fontsize, zorder=1000)
 
     # Set starting index of component so that we can plot rays from one component to the next
     idx = 1
@@ -82,6 +82,11 @@ def show_matplotlib(
 
     edge_rays = [0, model.num_rays - 1]
     label_x = 0.30
+
+    if show_labels:
+        ax.text(
+            label_x, model.beam_z, "Electron Gun", fontsize=label_fontsize, zorder=1000
+        )
 
     # Loop through components, and for each type of component plot rays in the correct ray,
     # and increment the index correctly
@@ -133,13 +138,14 @@ def show_matplotlib(
                 )
 
         if component.type == "Biprism":
-            ax.text(
-                label_x,
-                component.z - 0.01,
-                component.name,
-                fontsize=label_fontsize,
-                zorder=1000,
-            )
+            if show_labels:
+                ax.text(
+                    label_x,
+                    component.z - 0.01,
+                    component.name,
+                    fontsize=label_fontsize,
+                    zorder=1000,
+                )
 
             if model.beam_type == "x_axial" and component.theta == 0:
                 ax.plot(
@@ -163,13 +169,15 @@ def show_matplotlib(
             idx += 1
         elif component.type == "Quadrupole":
             r = component.radius
-            ax.text(
-                label_x,
-                component.z - 0.01,
-                "Upper " + component.name,
-                fontsize=label_fontsize,
-                zorder=1000,
-            )
+
+            if show_labels:
+                ax.text(
+                    label_x,
+                    component.z - 0.01,
+                    "Upper " + component.name,
+                    fontsize=label_fontsize,
+                    zorder=1000,
+                )
             ax.plot(
                 [-r, -r / 2],
                 [z[idx], z[idx]],
@@ -213,13 +221,14 @@ def show_matplotlib(
             idx += 1
 
         elif component.type == "Aperture":
-            ax.text(
-                label_x,
-                component.z - 0.01,
-                component.name,
-                fontsize=label_fontsize,
-                zorder=1000,
-            )
+            if show_labels:
+                ax.text(
+                    label_x,
+                    component.z - 0.01,
+                    component.name,
+                    fontsize=label_fontsize,
+                    zorder=1000,
+                )
             ri = component.aperture_radius_inner
             ro = component.aperture_radius_outer
 
@@ -259,13 +268,14 @@ def show_matplotlib(
             idx += 1
         elif component.type == "Double Deflector":
             r = component.radius
-            ax.text(
-                label_x,
-                component.z_up - 0.01,
-                "Upper " + component.name,
-                fontsize=label_fontsize,
-                zorder=1000,
-            )
+            if show_labels:
+                ax.text(
+                    label_x,
+                    component.z_up - 0.01,
+                    "Upper " + component.name,
+                    fontsize=label_fontsize,
+                    zorder=1000,
+                )
             ax.plot(
                 [-r, 0],
                 [z[idx], z[idx]],
@@ -334,13 +344,14 @@ def show_matplotlib(
                         zorder=1,
                     )
 
-            ax.text(
-                label_x,
-                component.z_low - 0.01,
-                "Lower " + component.name,
-                fontsize=label_fontsize,
-                zorder=1000,
-            )
+            if show_labels:
+                ax.text(
+                    label_x,
+                    component.z_low - 0.01,
+                    "Lower " + component.name,
+                    fontsize=label_fontsize,
+                    zorder=1000,
+                )
             ax.plot(
                 [-r, 0],
                 [z[idx], z[idx]],
@@ -368,13 +379,15 @@ def show_matplotlib(
             idx += 1
 
         elif component.type == "Lens":
-            ax.text(
-                label_x,
-                component.z - 0.01,
-                component.name,
-                fontsize=label_fontsize,
-                zorder=1000,
-            )
+
+            if show_labels:
+                ax.text(
+                    label_x,
+                    component.z - 0.01,
+                    component.name,
+                    fontsize=label_fontsize,
+                    zorder=1000,
+                )
             ax.add_patch(
                 mpl.patches.Arc(
                     (0, component.z),
@@ -405,13 +418,14 @@ def show_matplotlib(
             idx += 1
 
         elif component.type == "Astigmatic Lens":
-            ax.text(
-                label_x,
-                component.z - 0.01,
-                component.name,
-                fontsize=label_fontsize,
-                zorder=1000,
-            )
+            if show_labels:
+                ax.text(
+                    label_x,
+                    component.z - 0.01,
+                    component.name,
+                    fontsize=label_fontsize,
+                    zorder=1000,
+                )
             ax.add_patch(
                 mpl.patches.Arc(
                     (0, component.z),
@@ -442,13 +456,14 @@ def show_matplotlib(
             idx += 1
         elif component.type == "Deflector":
             r = component.radius
-            ax.text(
-                label_x,
-                component.z - 0.01,
-                component.name,
-                fontsize=label_fontsize,
-                zorder=1000,
-            )
+            if show_labels:
+                ax.text(
+                    label_x,
+                    component.z - 0.01,
+                    component.name,
+                    fontsize=label_fontsize,
+                    zorder=1000,
+                )
             ax.plot(
                 [-r, 0],
                 [z[idx], z[idx]],
@@ -476,13 +491,14 @@ def show_matplotlib(
 
             idx += 1
         elif component.type == "Sample":
-            ax.text(
-                label_x,
-                component.z - 0.01,
-                component.name,
-                fontsize=label_fontsize,
-                zorder=1000,
-            )
+            if show_labels:
+                ax.text(
+                    label_x,
+                    component.z - 0.01,
+                    component.name,
+                    fontsize=label_fontsize,
+                    zorder=1000,
+                )
             w = component.width
             ax.plot(
                 [component.x - w / 2, component.x + w / 2],
@@ -557,7 +573,9 @@ def show_matplotlib(
             )
 
     # Create the final labels and plot the detector shape
-    ax.text(label_x, -0.01, "Detector", fontsize=label_fontsize, zorder=1000)
+    if show_labels:
+        ax.text(label_x, -0.01, "Detector", fontsize=label_fontsize, zorder=1000)
+
     ax.plot(
         [-model.detector_size / 2, model.detector_size / 2],
         [0, 0],
