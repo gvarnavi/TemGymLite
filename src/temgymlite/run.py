@@ -7,7 +7,21 @@ mpl.rc("axes", titlesize=32, labelsize=28)
 
 
 def show_matplotlib(
-    model, name="model.svg", component_lw=4, edge_lw=1, label_fontsize=20, figax=None
+    model,
+    name="model.svg",
+    component_lw=4,
+    edge_lw=1,
+    label_fontsize=20,
+    figax=None,
+    ray_color="dimgray",
+    fill_color="aquamarine",
+    fill_color_pair=["khaki", "deepskyblue"],
+    plot_rays=True,
+    highlight_edges=True,
+    fill_between=True,
+    fill_alpha=1,
+    ray_alpha=1,
+    ray_lw=0.25,
 ):
     """Code to show a matplotlib model
 
@@ -65,20 +79,6 @@ def show_matplotlib(
 
     # Generate a list of the allowed rays, so we can block them when they hit an aperture
     allowed_rays = range(model.num_rays)
-
-    # Set colors of rays
-    ray_color = "dimgray"
-    fill_color = "aquamarine"
-    fill_color_pair = ["khaki", "deepskyblue"]
-
-    fill_alpha = 1
-    ray_alpha = 1
-
-    ray_lw = 0.25
-
-    plot_rays = True
-    highlight_edges = True
-    fill_between = True
 
     edge_rays = [0, model.num_rays - 1]
     label_x = 0.30
